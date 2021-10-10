@@ -1,0 +1,89 @@
+﻿@page "/fetchdata"
+
+@using Assignment1.Data
+@inject FileContext FileContext
+
+<h1>Adult</h1>
+
+
+
+@if (FileContext.Adults == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <div class="form-group">
+        <input class="form-control" type="text" placeholder="Filter..."
+               @bind="Filter"
+               @bind:event="oninput">
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>HairColor</th>
+            <th>EyeColor</th>
+            <th>Age</th>
+            <th>Weight</th>
+            <th>Height</th>
+            <th>Sex</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var adult in FileContext.Adults)
+        {
+            if (!IsVisible(adult))
+                continue;
+            <tr>
+                <td>@adult.FirstName</td>
+                <td>@adult.LastName</td>
+                <td>@adult.HairColor</td>
+                <td>@adult.EyeColor</td>
+                <td>@adult.Age</td>
+                <td>@adult.Weight</td>
+                <td>@adult.Height</td>
+                <td>@adult.Sex</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     Adults = FileContext.Adults;
+    // }
+
+    public string Filter { get; set; }
+
+
+    public bool IsVisible(Adult adult)
+    {
+        if (string.IsNullOrEmpty(Filter))
+            return true;
+
+        if (adult.FirstName.Contains(Filter, StringComparison.OrdinalIgnoreCase))
+          return true;
+
+          
+        /*
+        if (adult.FirstName.Contains(Filter, StringComparison.OrdinalIgnoreCase)|| adult.LastName.Contains(Filter, StringComparison.OrdinalIgnoreCase))
+            return true;*/
+        /*
+        if (adult.Id.ToString().StartsWith(Filter) || adult.LastName.StartsWith(Filter))
+            return true;
+            */
+
+        return false;
+        
+        
+    }
+
+}

@@ -1,0 +1,8 @@
+[
+  {
+    "UserName": "Admin",
+    "Password": "12345",
+    "Role" : "Admin",
+    "SecurityLevel": 5
+  }
+]

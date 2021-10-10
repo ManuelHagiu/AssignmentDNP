@@ -1,0 +1,30 @@
+@page "/"
+
+<h1>Family Manager</h1>
+
+
+
+<div class="page">
+    <div class="sidebar">
+
+    </div>
+
+    <div class="main">
+        <div class="top-row px-4">
+            <Login/>
+            <AuthorizeView>
+                <Authorized>
+                    <div class="col-md-4">
+                             <h3> @context.User.Identity.Name</h3>
+                        <img style="display: inline;" src="css/icon/user-icon-jpg-4.jpg"alt="logo"/>
+
+
+                    </div>
+                </Authorized>
+
+            </AuthorizeView>
+
+
+        </div>
+    </div>
+</div>
